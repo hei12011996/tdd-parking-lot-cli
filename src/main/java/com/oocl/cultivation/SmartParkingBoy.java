@@ -19,7 +19,7 @@ public class SmartParkingBoy extends ParkingPerson {
         if (isTicketProvided(ticket)){
             car = getCarFromParkingLot(ticket);
         } else {
-            setLastErrorMessage(lastErrorMessage = "Please provide your parking ticket.");
+            setLastErrorMessage("Please provide your parking ticket.");
         }
         return car;
     }
