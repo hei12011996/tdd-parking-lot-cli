@@ -215,20 +215,16 @@ class ParkingBoyFacts {
         ParkingLot firstParkingLot = new ParkingLot(1);
         ParkingLot secondParkingLot = new ParkingLot(1);
         ParkingBoy parkingBoy = new ParkingBoy(firstParkingLot, secondParkingLot);
-        Car firstCar = new Car();
-        Car secondCar = new Car();
-        Car thirdCar = new Car();
 
         assertEquals(1, firstParkingLot.getAvailableParkingPosition());
         assertEquals(1, secondParkingLot.getAvailableParkingPosition());
 
-        ParkingTicket firstTicket = parkingBoy.park(firstCar);
-        ParkingTicket secondTicket = parkingBoy.park(secondCar);
+        parkingBoy.park(new Car());
+        parkingBoy.park(new Car());
         assertEquals(0, firstParkingLot.getAvailableParkingPosition());
         assertEquals(0, secondParkingLot.getAvailableParkingPosition());
-        ParkingTicket thirdTicket = parkingBoy.park(thirdCar);
 
-        assertNull(thirdTicket);
+        assertNull(parkingBoy.park(new Car()));
     }
 
     @Test
@@ -236,18 +232,15 @@ class ParkingBoyFacts {
         ParkingLot firstParkingLot = new ParkingLot(1);
         ParkingLot secondParkingLot = new ParkingLot(1);
         ParkingBoy parkingBoy = new ParkingBoy(firstParkingLot, secondParkingLot);
-        Car firstCar = new Car();
-        Car secondCar = new Car();
-        Car thirdCar = new Car();
 
         assertEquals(1, firstParkingLot.getAvailableParkingPosition());
         assertEquals(1, secondParkingLot.getAvailableParkingPosition());
 
-        ParkingTicket firstTicket = parkingBoy.park(firstCar);
-        ParkingTicket secondTicket = parkingBoy.park(secondCar);
+        parkingBoy.park(new Car());
+        parkingBoy.park(new Car());
         assertEquals(0, firstParkingLot.getAvailableParkingPosition());
         assertEquals(0, secondParkingLot.getAvailableParkingPosition());
-        ParkingTicket thirdTicket = parkingBoy.park(thirdCar);
+        parkingBoy.park(new Car());
 
         assertEquals("The parking lot is full.", parkingBoy.getLastErrorMessage());
     }

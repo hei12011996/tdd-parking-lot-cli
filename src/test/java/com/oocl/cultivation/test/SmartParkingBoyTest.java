@@ -186,20 +186,16 @@ public class SmartParkingBoyTest {
         ParkingLot firstParkingLot = new ParkingLot(1);
         ParkingLot secondParkingLot = new ParkingLot(1);
         SmartParkingBoy smartParkingBoy = new SmartParkingBoy(firstParkingLot, secondParkingLot);
-        Car firstCar = new Car();
-        Car secondCar = new Car();
-        Car thirdCar = new Car();
 
         assertEquals(1, firstParkingLot.getAvailableParkingPosition());
         assertEquals(1, secondParkingLot.getAvailableParkingPosition());
 
-        ParkingTicket firstTicket = smartParkingBoy.park(firstCar);
-        ParkingTicket secondTicket = smartParkingBoy.park(secondCar);
+        smartParkingBoy.park(new Car());
+        smartParkingBoy.park(new Car());
         assertEquals(0, firstParkingLot.getAvailableParkingPosition());
         assertEquals(0, secondParkingLot.getAvailableParkingPosition());
-        ParkingTicket thirdTicket = smartParkingBoy.park(thirdCar);
 
-        assertNull(thirdTicket);
+        assertNull(smartParkingBoy.park(new Car()));
     }
 
     @Test
@@ -207,18 +203,15 @@ public class SmartParkingBoyTest {
         ParkingLot firstParkingLot = new ParkingLot(1);
         ParkingLot secondParkingLot = new ParkingLot(1);
         SmartParkingBoy smartParkingBoy = new SmartParkingBoy(firstParkingLot, secondParkingLot);
-        Car firstCar = new Car();
-        Car secondCar = new Car();
-        Car thirdCar = new Car();
 
         assertEquals(1, firstParkingLot.getAvailableParkingPosition());
         assertEquals(1, secondParkingLot.getAvailableParkingPosition());
 
-        ParkingTicket firstTicket = smartParkingBoy.park(firstCar);
-        ParkingTicket secondTicket = smartParkingBoy.park(secondCar);
+        smartParkingBoy.park(new Car());
+        smartParkingBoy.park(new Car());
         assertEquals(0, firstParkingLot.getAvailableParkingPosition());
         assertEquals(0, secondParkingLot.getAvailableParkingPosition());
-        ParkingTicket thirdTicket = smartParkingBoy.park(thirdCar);
+        smartParkingBoy.park(new Car());
 
         assertEquals("The parking lot is full.", smartParkingBoy.getLastErrorMessage());
     }
