@@ -209,4 +209,46 @@ class ParkingBoyFacts {
         assertSame(secondCar, fetchedBySecondTicket);
         assertSame(thirdCar, fetchedByThirdTicket);
     }
+
+    @Test
+    void should_not_park_cars_to_when_all_parking_lots_are_full() {
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        ParkingLot secondParkingLot = new ParkingLot(1);
+        ParkingBoy parkingBoy = new ParkingBoy(firstParkingLot, secondParkingLot);
+        Car firstCar = new Car();
+        Car secondCar = new Car();
+        Car thirdCar = new Car();
+
+        assertEquals(1, firstParkingLot.getAvailableParkingPosition());
+        assertEquals(1, secondParkingLot.getAvailableParkingPosition());
+
+        ParkingTicket firstTicket = parkingBoy.park(firstCar);
+        ParkingTicket secondTicket = parkingBoy.park(secondCar);
+        assertEquals(0, firstParkingLot.getAvailableParkingPosition());
+        assertEquals(0, secondParkingLot.getAvailableParkingPosition());
+        ParkingTicket thirdTicket = parkingBoy.park(thirdCar);
+
+        assertNull(thirdTicket);
+    }
+
+    @Test
+    void should_get_message_when_all_parking_lots_are_full() {
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        ParkingLot secondParkingLot = new ParkingLot(1);
+        ParkingBoy parkingBoy = new ParkingBoy(firstParkingLot, secondParkingLot);
+        Car firstCar = new Car();
+        Car secondCar = new Car();
+        Car thirdCar = new Car();
+
+        assertEquals(1, firstParkingLot.getAvailableParkingPosition());
+        assertEquals(1, secondParkingLot.getAvailableParkingPosition());
+
+        ParkingTicket firstTicket = parkingBoy.park(firstCar);
+        ParkingTicket secondTicket = parkingBoy.park(secondCar);
+        assertEquals(0, firstParkingLot.getAvailableParkingPosition());
+        assertEquals(0, secondParkingLot.getAvailableParkingPosition());
+        ParkingTicket thirdTicket = parkingBoy.park(thirdCar);
+
+        assertEquals("The parking lot is full.", parkingBoy.getLastErrorMessage());
+    }
 }
