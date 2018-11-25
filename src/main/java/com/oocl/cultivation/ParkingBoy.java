@@ -14,10 +14,18 @@ public class ParkingBoy {
     }
 
     public Car fetch(ParkingTicket ticket) {
-        return this.parkingLot.returnCar(ticket);
+        return getCarFromParkingLot(ticket);
     }
 
     public String getLastErrorMessage() {
         return lastErrorMessage;
+    }
+
+    private Car getCarFromParkingLot(ParkingTicket ticket){
+        Car fetchedCar = this.parkingLot.returnCar(ticket);
+        if (fetchedCar == null) {
+            this.lastErrorMessage = "Unrecognized parking ticket.";
+        }
+        return fetchedCar;
     }
 }
