@@ -153,13 +153,46 @@ class ParkingBoyFacts {
     }
 
     @Test
-    void should_park_multiple_cars_to_available_parking_lot_and_get_them_back() {
+    void should_park_multiple_cars_to_the_first_parking_lot_as_long_as_it_is_not_full_and_get_them_back() {
+        ParkingLot firstParkingLot = new ParkingLot();
+        ParkingLot secondParkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(firstParkingLot, secondParkingLot);
+        Car firstCar = new Car();
+        Car secondCar = new Car();
+        Car thirdCar = new Car();
+
+        assertEquals(10, firstParkingLot.getAvailableParkingPosition());
+        assertEquals(10, secondParkingLot.getAvailableParkingPosition());
+
+        ParkingTicket firstTicket = parkingBoy.park(firstCar);
+        assertEquals(9, firstParkingLot.getAvailableParkingPosition());
+        ParkingTicket secondTicket = parkingBoy.park(secondCar);
+        assertEquals(8, firstParkingLot.getAvailableParkingPosition());
+        ParkingTicket thirdTicket = parkingBoy.park(thirdCar);
+        assertEquals(7, firstParkingLot.getAvailableParkingPosition());
+
+        assertEquals(10, secondParkingLot.getAvailableParkingPosition());
+
+        Car fetchedByFirstTicket = parkingBoy.fetch(firstTicket);
+        Car fetchedBySecondTicket = parkingBoy.fetch(secondTicket);
+        Car fetchedByThirdTicket = parkingBoy.fetch(thirdTicket);
+
+        assertSame(firstCar, fetchedByFirstTicket);
+        assertSame(secondCar, fetchedBySecondTicket);
+        assertSame(thirdCar, fetchedByThirdTicket);
+    }
+
+    @Test
+    void should_park_multiple_cars_to_the_second_parking_lot_once_the_first_parking_lot_is_full_and_get_them_back() {
         ParkingLot firstParkingLot = new ParkingLot(1);
         ParkingLot secondParkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(firstParkingLot, secondParkingLot);
         Car firstCar = new Car();
         Car secondCar = new Car();
         Car thirdCar = new Car();
+
+        assertEquals(1, firstParkingLot.getAvailableParkingPosition());
+        assertEquals(10, secondParkingLot.getAvailableParkingPosition());
 
         ParkingTicket firstTicket = parkingBoy.park(firstCar);
         assertEquals(0, firstParkingLot.getAvailableParkingPosition());
