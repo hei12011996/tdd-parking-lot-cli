@@ -10,8 +10,12 @@ public class ParkingBoy {
     }
 
     public ParkingTicket park(Car car) {
-        clearLastErrorMessage();
-        return this.parkingLot.parkCar(car);
+        if (this.parkingLot.getAvailableParkingPosition() == 0){
+            return null;
+        } else {
+            clearLastErrorMessage();
+            return this.parkingLot.parkCar(car);
+        }
     }
 
     public Car fetch(ParkingTicket ticket) {
