@@ -180,4 +180,46 @@ public class SmartParkingBoyTest {
         assertSame(secondCar, fetchedBySecondTicket);
         assertSame(thirdCar, fetchedByThirdTicket);
     }
+
+    @Test
+    void should_not_park_cars_to_when_all_parking_lots_are_full() {
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        ParkingLot secondParkingLot = new ParkingLot(1);
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(firstParkingLot, secondParkingLot);
+        Car firstCar = new Car();
+        Car secondCar = new Car();
+        Car thirdCar = new Car();
+
+        assertEquals(1, firstParkingLot.getAvailableParkingPosition());
+        assertEquals(1, secondParkingLot.getAvailableParkingPosition());
+
+        ParkingTicket firstTicket = smartParkingBoy.park(firstCar);
+        ParkingTicket secondTicket = smartParkingBoy.park(secondCar);
+        assertEquals(0, firstParkingLot.getAvailableParkingPosition());
+        assertEquals(0, secondParkingLot.getAvailableParkingPosition());
+        ParkingTicket thirdTicket = smartParkingBoy.park(thirdCar);
+
+        assertNull(thirdTicket);
+    }
+
+    @Test
+    void should_get_message_when_all_parking_lots_are_full() {
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        ParkingLot secondParkingLot = new ParkingLot(1);
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(firstParkingLot, secondParkingLot);
+        Car firstCar = new Car();
+        Car secondCar = new Car();
+        Car thirdCar = new Car();
+
+        assertEquals(1, firstParkingLot.getAvailableParkingPosition());
+        assertEquals(1, secondParkingLot.getAvailableParkingPosition());
+
+        ParkingTicket firstTicket = smartParkingBoy.park(firstCar);
+        ParkingTicket secondTicket = smartParkingBoy.park(secondCar);
+        assertEquals(0, firstParkingLot.getAvailableParkingPosition());
+        assertEquals(0, secondParkingLot.getAvailableParkingPosition());
+        ParkingTicket thirdTicket = smartParkingBoy.park(thirdCar);
+
+        assertEquals("The parking lot is full.", smartParkingBoy.getLastErrorMessage());
+    }
 }
