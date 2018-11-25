@@ -2,7 +2,7 @@ package com.oocl.cultivation;
 
 import java.util.*;
 
-class ParkingPerson {
+public abstract class ParkingPerson {
 
     protected final List<ParkingLot> parkingLots = new ArrayList<ParkingLot>();
     protected final Map<ParkingTicket, ParkingLot> parkingLotStorage = new HashMap<ParkingTicket, ParkingLot>();
@@ -12,13 +12,9 @@ class ParkingPerson {
         this.parkingLots.addAll(Arrays.asList(parkingLots));
     }
 
-    public ParkingTicket park(Car car) {
-        return null;
-    }
+    public abstract ParkingTicket park(Car car);
 
-    public Car fetch(ParkingTicket ticket) {
-        return null;
-    }
+    public abstract Car fetch(ParkingTicket ticket);
 
     public String getLastErrorMessage() {
         return lastErrorMessage;
@@ -29,7 +25,7 @@ class ParkingPerson {
     }
 
     protected ParkingTicket parkCarToParkingLot(Car car, ParkingLot parkingLot){
-        if (parkingLot == null){
+        if (parkingLot == null || parkingLot.getAvailableParkingPosition() == 0){
             setLastErrorMessage("The parking lot is full.");
             return null;
         } else {
