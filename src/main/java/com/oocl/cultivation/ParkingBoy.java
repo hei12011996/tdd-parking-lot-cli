@@ -15,11 +15,20 @@ public class ParkingBoy {
     }
 
     public Car fetch(ParkingTicket ticket) {
-        return getCarFromParkingLot(ticket);
+        if (isTicketValid(ticket)){
+            return getCarFromParkingLot(ticket);
+        } else {
+            this.lastErrorMessage = "Please provide your parking ticket.";
+            return null;
+        }
     }
 
     public String getLastErrorMessage() {
         return lastErrorMessage;
+    }
+
+    private boolean isTicketValid(ParkingTicket ticket){
+        return ticket != null;
     }
 
     private Car getCarFromParkingLot(ParkingTicket ticket){
