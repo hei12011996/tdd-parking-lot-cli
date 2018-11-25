@@ -10,6 +10,7 @@ public class ParkingBoy {
     }
 
     public ParkingTicket park(Car car) {
+        clearLastErrorMessage();
         return this.parkingLot.parkCar(car);
     }
 
@@ -25,7 +26,13 @@ public class ParkingBoy {
         Car fetchedCar = this.parkingLot.returnCar(ticket);
         if (fetchedCar == null) {
             this.lastErrorMessage = "Unrecognized parking ticket.";
+        } else {
+            clearLastErrorMessage();
         }
         return fetchedCar;
+    }
+
+    private void clearLastErrorMessage() {
+        this.lastErrorMessage = null;
     }
 }
