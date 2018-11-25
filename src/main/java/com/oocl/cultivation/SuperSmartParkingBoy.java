@@ -8,11 +8,31 @@ public class SuperSmartParkingBoy extends ParkingPerson{
 
     @Override
     public ParkingTicket park(Car car) {
-        return null;
+        ParkingLot availableParkingLot = findParkingLotThatHasLargestAvailablePositionRate();
+        ParkingTicket ticket = parkCarToParkingLot(car, availableParkingLot);
+        return ticket;
     }
 
     @Override
     public Car fetch(ParkingTicket ticket) {
-        return null;
+        Car car = null;
+        if (isTicketProvided(ticket)){
+            car = getCarFromParkingLot(ticket);
+        } else {
+            setLastErrorMessage(lastErrorMessage = "Please provide your parking ticket.");
+        }
+        return car;
+    }
+
+    private ParkingLot findParkingLotThatHasLargestAvailablePositionRate(){
+        ParkingLot suitableParkingLot = null;
+        double maxAvailablePositionRate = 0.0;
+        for (ParkingLot parkingLot : this.parkingLots){
+            if (parkingLot.getAvailablePositionRate() > maxAvailablePositionRate) {
+                maxAvailablePositionRate = parkingLot.getAvailablePositionRate();
+                suitableParkingLot = parkingLot;
+            }
+        }
+        return suitableParkingLot;
     }
 }
