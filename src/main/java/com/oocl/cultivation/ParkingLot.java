@@ -19,6 +19,10 @@ public class ParkingLot {
         return capacity - cars.size();
     }
 
+    public double getAvailablePositionRate() {
+        return (double) getAvailableParkingPosition() / (double) capacity;
+    }
+
     public ParkingTicket parkCar(Car car){
         ParkingTicket ticket = new ParkingTicket();
         cars.put(ticket, car);
