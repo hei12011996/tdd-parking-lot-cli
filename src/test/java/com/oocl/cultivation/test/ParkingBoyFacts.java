@@ -151,4 +151,29 @@ class ParkingBoyFacts {
 
         assertEquals("The parking lot is full.", parkingBoy.getLastErrorMessage());
     }
+
+    @Test
+    void should_park_multiple_cars_to_available_parking_lot_and_get_them_back() {
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        ParkingLot secondParkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(firstParkingLot, secondParkingLot);
+        Car firstCar = new Car();
+        Car secondCar = new Car();
+        Car thirdCar = new Car();
+
+        ParkingTicket firstTicket = parkingBoy.park(firstCar);
+        assertEquals(0, firstParkingLot.getAvailableParkingPosition());
+        ParkingTicket secondTicket = parkingBoy.park(secondCar);
+        assertEquals(9, secondParkingLot.getAvailableParkingPosition());
+        ParkingTicket thirdTicket = parkingBoy.park(thirdCar);
+        assertEquals(8, secondParkingLot.getAvailableParkingPosition());
+
+        Car fetchedByFirstTicket = parkingBoy.fetch(firstTicket);
+        Car fetchedBySecondTicket = parkingBoy.fetch(secondTicket);
+        Car fetchedByThirdTicket = parkingBoy.fetch(thirdTicket);
+
+        assertSame(firstCar, fetchedByFirstTicket);
+        assertSame(secondCar, fetchedBySecondTicket);
+        assertSame(thirdCar, fetchedByThirdTicket);
+    }
 }
