@@ -18,16 +18,6 @@ public class ParkingBoy extends ParkingPerson{
         return ticket;
     }
 
-    public Car fetch(ParkingTicket ticket) {
-        Car car = null;
-        if (isTicketProvided(ticket)){
-            car = getCarFromParkingLot(ticket);
-        } else {
-            setLastErrorMessage("Please provide your parking ticket.");
-        }
-        return car;
-    }
-
     private ParkingLot findAvailableParkingLot(){
         ParkingLot availableParkingLot = null;
         for (ParkingLot parkingLot : this.parkingLots){

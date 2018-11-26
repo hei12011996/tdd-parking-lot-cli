@@ -30,17 +30,6 @@ public class ParkingManager extends ParkingPerson {
         }
     }
 
-    @Override
-    public Car fetch(ParkingTicket ticket) {
-        Car car = null;
-        if (isTicketProvided(ticket)){
-            car = getCarFromParkingLot(ticket);
-        } else {
-            setLastErrorMessage("Please provide your parking ticket.");
-        }
-        return car;
-    }
-
     public Car tellParkingBoyToFetch(ParkingBoy parkingBoy, ParkingTicket ticket) {
         if (!isParkingBoyUnderManagement(parkingBoy)) {
             setLastErrorMessage("That parking boy is not under management.");

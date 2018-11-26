@@ -13,17 +13,6 @@ public class SmartParkingBoy extends ParkingBoy {
         return ticket;
     }
 
-    @Override
-    public Car fetch(ParkingTicket ticket) {
-        Car car = null;
-        if (isTicketProvided(ticket)){
-            car = getCarFromParkingLot(ticket);
-        } else {
-            setLastErrorMessage("Please provide your parking ticket.");
-        }
-        return car;
-    }
-
     private ParkingLot findParkingLotThatContainsMostEmptyPositions(){
         ParkingLot mostEmptyPositionsParkingLot = null;
         int maxNumberOfEmptyPositions = 0;

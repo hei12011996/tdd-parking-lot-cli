@@ -14,7 +14,15 @@ abstract class ParkingPerson {
 
     public abstract ParkingTicket park(Car car);
 
-    public abstract Car fetch(ParkingTicket ticket);
+    public Car fetch(ParkingTicket ticket) {
+        Car car = null;
+        if (isTicketProvided(ticket)){
+            car = getCarFromParkingLot(ticket);
+        } else {
+            setLastErrorMessage("Please provide your parking ticket.");
+        }
+        return car;
+    }
 
     public String getLastErrorMessage() {
         return lastErrorMessage;
