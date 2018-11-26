@@ -3,7 +3,7 @@ package com.oocl.cultivation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParkingManager extends ParkingBoy {
+public class ParkingManager extends ParkingPerson {
 
     private final List<ParkingBoy> employees = new ArrayList<ParkingBoy>();
     private String lastErrorMessageFromParkingBoy;
