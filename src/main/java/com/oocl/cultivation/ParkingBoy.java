@@ -13,12 +13,12 @@ public class ParkingBoy extends ParkingPerson{
     }
 
     public ParkingTicket park(Car car) {
-        ParkingLot availableParkingLot = findAvailableParkingLot();
+        ParkingLot availableParkingLot = findAvailableParkingLotSequentially();
         ParkingTicket ticket = parkCarToParkingLot(car, availableParkingLot);
         return ticket;
     }
 
-    private ParkingLot findAvailableParkingLot(){
+    private ParkingLot findAvailableParkingLotSequentially(){
         ParkingLot availableParkingLot = null;
         for (ParkingLot parkingLot : this.parkingLots){
             if (parkingLot.getAvailableParkingPosition() > 0) {
