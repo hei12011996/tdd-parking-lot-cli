@@ -4,12 +4,8 @@ import java.util.*;
 
 public class ParkingBoy extends ParkingPerson{
 
-    protected final List<ParkingLot> parkingLots = new ArrayList<ParkingLot>();
-    protected final Map<ParkingTicket, ParkingLot> parkingLotStorage = new HashMap<ParkingTicket, ParkingLot>();
-    protected String lastErrorMessage;
-
     public ParkingBoy(ParkingLot... parkingLots) {
-        this.parkingLots.addAll(Arrays.asList(parkingLots));
+        super(parkingLots);
     }
 
     public ParkingTicket park(Car car) {
